@@ -1,0 +1,113 @@
+﻿<Window x:Class="QuizApp.ViewQuiz"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuizApp"
+        mc:Ignorable="d"
+        Title="View Quiz" Width="800" Height="Auto">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="LightGray"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="BorderThickness" Value="2"/>
+                    <Setter Property="BorderBrush" Value="DarkGray"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="45"/>
+        </Grid.RowDefinitions>
+
+        <!-- Display Area for Added Question -->
+        <ListView Grid.Row="0" x:Name="lvQuestion" Width="Auto" Height="Auto" SelectionChanged="lvQuestion_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Question" Width="360"
+                                            DisplayMemberBinding="{Binding Path=QuestionContent}"/>
+                    <GridViewColumn Header="Answer A" Width="110"
+                                            DisplayMemberBinding="{Binding Path=AnswersA}"/>
+                    <GridViewColumn Header="Answer B" Width="110"
+                                            DisplayMemberBinding="{Binding Path=AnswersB}"/>
+                    <GridViewColumn Header="Answer C" Width="110"
+                                            DisplayMemberBinding="{Binding Path=AnswersC}"/>
+                    <GridViewColumn Header="Answer D" Width="110"
+                                            DisplayMemberBinding="{Binding Path=AnswersD}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <!-- Question Input -->
+        <Label Content="Question:" Grid.Row="1" Margin="10"/>
+        <TextBox x:Name="txtQuestion" Grid.Row="2" Grid.Column="1" Margin="5" FontSize="14"/>
+
+        <!-- Answer Inputs -->
+        <Label Content="Answers:" Grid.Row="3" Margin="10"/>
+        <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Vertical" Margin="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <CheckBox x:Name="chkA" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtAnswerA" Grid.Column="1" FontSize="14"/>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <CheckBox x:Name="chkB" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtAnswerB" Grid.Column="1" Margin="0 2" FontSize="14"/>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <CheckBox x:Name="chkC" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtAnswerC" Grid.Column="1" Margin="0 2" FontSize="14"/>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <CheckBox x:Name="chkD" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtAnswerD" Grid.Column="1" Margin="0 2" FontSize="14"/>
+            </Grid>
+        </StackPanel>
+
+        <!-- Button to Add Question -->
+        <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="btnAdd" Content="Add Question" Margin="10" Width="105" Click="btnAdd_Click"/>
+            <Button x:Name="btnUpdate" Content="Update Question" Margin="10" Width="105" Click="btnUpdate_Click" />
+            <Button x:Name="btnDelete" Content="Delete Question" Margin="10" Width="105" Click="btnDelete_Click" />
+            <Button x:Name="btnPractice" Content="Practice" Margin="10" Width="105" Click="btnPractice_Click"/>
+            <Button x:Name="btnMain" Content="Back" Margin="10" Width="105" Click="btnMain_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

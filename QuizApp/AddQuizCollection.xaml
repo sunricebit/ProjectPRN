@@ -1,0 +1,71 @@
+﻿<Window x:Class="QuizApp.AddQuizCollection"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuizApp"
+        mc:Ignorable="d"
+        Title="Add Quiz Collection" Width="400" Height="250">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="LightGray"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="BorderThickness" Value="2"/>
+                    <Setter Property="BorderBrush" Value="DarkGray"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Title -->
+        <TextBlock Text="Title:" FontSize="18" FontWeight="Bold"/>
+        <TextBox x:Name="txtTitle" Grid.Row="1" Margin="0,5" FontSize="14"/>
+
+        <!-- CategoryId ComboBox -->
+        <TextBlock Text="Category:" FontSize="18" FontWeight="Bold" Grid.Row="2" Margin="0,10,0,5"/>
+        <ComboBox x:Name="cmbCategoryId" Grid.Row="3" Margin="0,0,0,10" DisplayMemberPath="Name" SelectedValuePath="Id" SelectionChanged="cmbCategoryId_SelectionChanged">
+            <!-- Bind the ComboBox items to the collection of categories from the database -->
+            <ComboBox.ItemsSource>
+                <CompositeCollection>
+                    <CollectionContainer Collection="{Binding ExistingCategories}" />
+                    <ComboBoxItem>
+                        <TextBlock Text="Add New Category" />
+                    </ComboBoxItem>
+                </CompositeCollection>
+            </ComboBox.ItemsSource>
+        </ComboBox>
+
+        <!-- New Category TextBox -->
+        <TextBox x:Name="txtNewCategory" Grid.Row="4" Margin="0,5" Visibility="Collapsed" FontSize="14"/>
+
+        <!-- Buttons -->
+        <StackPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Center" Margin="0,33,0,-33">
+            <Button Content="Add" Width="100" Click="btnAdd_Click" Margin="5"/>
+            <Button Content="Cancel" Width="100" Click="btnCancel_Click" Margin="5"/>
+        </StackPanel>
+    </Grid>
+</Window>
